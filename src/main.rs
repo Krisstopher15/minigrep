@@ -4,8 +4,7 @@ use std::fs;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let query = &args[1];
-    let file_path = &args[2];
+    let Config{query, file_path} = Config::new(&args);
 
     println!("Searching for {}", query);
     println!("In file {}", file_path);
@@ -15,4 +14,18 @@ fn main() {
 
     println!("With text:\n{contents}");
     
+}
+
+struct Config {
+    query: String,
+    file_path: String
+}
+
+impl Config {
+    fn new(args: &[String]) -> Config {
+        let query = args[1].clone();
+        let file_path = args[2].clone();
+
+        Config {query, file_path}
+    }
 }
